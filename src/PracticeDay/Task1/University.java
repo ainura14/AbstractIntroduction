@@ -1,2 +1,9 @@
-package PracticeDay.Task1;public class University {
+package PracticeDay.Task1;
+
+import java.time.LocalDate;
+
+public class University extends EducationCenter{
+    public University(String name, String locatedCountry, LocalDate foundationYear) {
+        super(name, locatedCountry, foundationYear);
+    }
 }

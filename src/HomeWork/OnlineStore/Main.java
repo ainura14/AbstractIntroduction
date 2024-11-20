@@ -1,6 +1,7 @@
 package HomeWork.OnlineStore;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -34,7 +35,7 @@ public class Main {
                     user.setEmail(scanner.nextLine());
                     System.out.println("Write your password");
                     user.setPassword(scInt.nextInt());
-                    user.add(user);
+                    user.addUser(user);
                     break;
                 }
                 case "2", "Login" ->{
@@ -44,9 +45,108 @@ public class Main {
                         System.out.println("Enter your password: ");
                         int loginPassword = scInt.nextInt();
                         if(user.getPassword() == loginPassword){
-                            System.out.println("We will show your products...");
-                            Product[] products1 = user.getAll();
-                            System.out.println(Arrays.toString(products1));
+//                            System.out.println("We will show your products...");
+//                            Product[] products1 = user.getAll();
+//                            System.out.println(Arrays.toString(products1));
+                            boolean loggedIn = true;
+                            while(loggedIn){
+                                System.out.println("""
+                                        Press 0 to logout
+                                        Press 1 to add new product
+                                        Press 2 to get all products
+                                        Press 3 to get all books
+                                        Press 4 to get all device
+                                        Press 5 to exit
+                                        """);
+                                int num = scInt.nextInt();
+                            switch(num) {
+                                case 0:
+                                    user.setEmail(null);
+                                    user.setPassword(0);
+                                    break;
+                                case 1:
+                                    boolean addDeviceTrue = true;
+                                    while(addDeviceTrue) {
+                                        System.out.println("""
+                                                Which product do you want to add: 
+                                                Press to 1 to add book
+                                                Press to 2 to add device
+                                                Press to 3 to exit
+                                                """);
+                                    int choiceProduct = scInt.nextInt();
+                                        switch (choiceProduct) {
+                                            case 1:
+                                                System.out.println("Write name of the book: ");
+                                                String bookName = scanner.nextLine();
+
+                                                System.out.println("Write description of the book: ");
+                                                String bookDescription = scanner.nextLine();
+
+                                                System.out.println("Write price of the book: ");
+                                                int bookPrice = scInt.nextInt();
+
+                                                System.out.println("Write date of the book: ");
+                                                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                                String inputDate = scanner.nextLine();
+                                                LocalDate bookDate = LocalDate.parse(inputDate, formatter);
+
+                                                System.out.println("Write author full name: ");
+                                                String bookAuthorFullName = scanner.nextLine();
+
+                                                Book book1 = new Book(bookName, bookDescription, bookPrice, bookDate, bookAuthorFullName);
+                                                user.addBook(book1);
+                                                break;
+                                            case 2:
+                                                System.out.println("Write name of the device: ");
+                                                String deviceName = scanner.nextLine();
+
+                                                System.out.println("Write description of the device: ");
+                                                String deviceDescription = scanner.nextLine();
+
+                                                System.out.println("Write price of the device: ");
+                                                int devicePrice = scInt.nextInt();
+
+                                                System.out.println("Write date of the device: ");
+                                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                                                String inputDate1 = scanner.nextLine();
+                                                LocalDate deviceDate = LocalDate.parse(inputDate1, formatter1);
+
+                                                System.out.println("Write brand the device: ");
+                                                String deviceBrand = scanner.nextLine();
+
+                                                System.out.println("Write color the device: ");
+                                                String deviceColor = scanner.nextLine();
+
+                                                System.out.println("Write the device is new(Yes/NO): ");
+                                                String deviceIsNew = scanner.nextLine();
+
+                                                System.out.println("Write memory the device: ");
+                                                int deviceMemory = scInt.nextInt();
+
+                                                Device device1 = new Device(deviceName, deviceDescription, devicePrice, deviceDate, deviceBrand, deviceColor, deviceIsNew, deviceMemory);
+                                                user.addDevice(device1);
+                                                break;
+                                            case 3:
+                                                addDeviceTrue = false;
+                                            default:
+                                                System.out.println("Can't find this option.");
+                                        }
+                                    }
+                                    break;
+                                case 2:
+                                    Product[] products1 = user.getAllProducts();
+                                    System.out.println(Arrays.toString(products1));
+                                    break;
+                                case 3:
+                                    System.out.println(user.getAllBook());
+                                    break;
+                                case 4:
+                                    System.out.println(user.getAllDevice());
+                                    break;
+                                case 5:
+                                    loggedIn = false;
+                                }
+                            }
                         }else{
                             System.out.println("Invalid password.");
                         }

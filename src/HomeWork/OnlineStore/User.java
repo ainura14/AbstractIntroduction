@@ -7,7 +7,7 @@ public class User {
     private String lastName;
     private String email;
     private int password;
-    private Product[] products;
+    private Product[] products = new Product[0];
     private User[] users = new User[4];
     private int size = 0;
 
@@ -61,14 +61,45 @@ public class User {
         this.products = products;
     }
 
-    public String add(User user){
+    public String addUser(User user){
         users = Arrays.copyOf(users, size + 1);
         users[size] = user;
         return "Successfully saved student!";
     }
-    public Product[] getAll(){
+    public Product[] getAllProducts(){
         return products;
     }
+    public String addBook(Book book){
+        products = Arrays.copyOf(products, products.length + 1);
+        products[products.length - 1] = book;
+        return "Book successfully saved!";
+    }
+    public String addDevice(Device device){
+        products = Arrays.copyOf(products, products.length + 1);
+        products[products.length - 1] = device;
+        return "Book successfully saved!";
+    }
+
+    public String getAllBook(){
+        String books = "";
+        for (int i = 0; i < products.length; i++) {
+            if(products[i] instanceof Book){
+                books = products[i].toString();
+            }
+        }
+        return books;
+    }
+    public String getAllDevice(){
+        String devices = "";
+        for (int i = 0; i < products.length; i++) {
+            if(products[i] instanceof Device){
+                devices += products[i].toString();
+            }
+        }
+        return devices;
+    }
+
+
 
 
 
