@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 public class Book extends Product{
     private String authorFullName;
+    private int incrementedId = 0;
 
-    public Book(String name, String description, int price, LocalDate createdAt, String authorFullName) {
-        super(name, description, price, createdAt);
+    public Book(long id, String name, String description, int price, LocalDate createdAt, String authorFullName) {
+        super(id, name, description, price, createdAt);
         this.authorFullName = authorFullName;
+        this.incrementedId++;
     }
 
     @Override

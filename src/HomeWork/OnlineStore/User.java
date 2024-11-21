@@ -7,7 +7,7 @@ public class User {
     private String lastName;
     private String email;
     private int password;
-    private Product[] products = new Product[0];
+    static private Product[] products = new Product[0];
     private User[] users = new User[4];
     private int size = 0;
 
@@ -97,6 +97,47 @@ public class User {
             }
         }
         return devices;
+    }
+    public static String deleteProduct(long id){
+        int productSize = products.length;
+        boolean findBook = false;
+        for (int i = 0; i < productSize; i++) {
+            if(products[i].getId() == id) {
+                findBook = true;
+                for (int j = i; j < productSize - 1; j++) {
+                    products[j] = products[j + 1];
+                }
+                products[productSize - 1] = null;
+            }
+            products = Arrays.copyOf(products, products.length - 1);
+            productSize--;
+        }
+        if(!findBook){
+            return "Successfully deleted.";
+        }else{
+            return "Can't find this id";
+        }
+    }
+    public static String deleteProduct(long[] ids){
+        boolean findById = false;
+        int productSize = products.length;
+        for (int i = 0; i < productSize; i++) {
+            for (long id : ids) {
+                if(products[i].getId() == id){
+                    findById = true;
+                    for (int j = i; j < productSize - 1; j++) {
+                        products[j] = products[j + 1];
+                    }
+                    productSize -= 1;
+                }
+                products = Arrays.copyOf(products, products.length - 1);
+            }
+        }
+        if(!findById){
+            return "Successfully deleted.";
+        }else{
+            return "Can't find this ids";
+        }
     }
 
 

@@ -11,10 +11,10 @@ public class Main {
         Scanner scInt = new Scanner(System.in);
         User user = new User();
 
-        Product device = new Device("Laptop", "for Study", 12000, LocalDate.of(2023, 01, 12), "Mac", "grey", "Yes", 256);
-        Product book = new Book("C++", "for learn beginners", 560, LocalDate.of(2020, 03, 24), "Askat Musaev");
-        Product[] products = {device, book};
-        user.setProducts(products);
+//        Product device = new Device(1l,"Laptop", "for Study", 12000, LocalDate.of(2023, 01, 12),"Mac", "grey", "Yes", 256);
+//        Product book = new Book(1l,"C++", "for learn beginners", 560, LocalDate.of(2020, 03, 24), "Askat Musaev");
+//        Product[] products = {device, book};
+//        user.setProducts(products);
 
 
         while(true) {
@@ -56,7 +56,9 @@ public class Main {
                                         Press 2 to get all products
                                         Press 3 to get all books
                                         Press 4 to get all device
-                                        Press 5 to exit
+                                        Press 5 to delete product by ID
+                                        Press 6 to delete products by ID
+                                        Press 7 to exit
                                         """);
                                 int num = scInt.nextInt();
                             switch(num) {
@@ -93,7 +95,7 @@ public class Main {
                                                 System.out.println("Write author full name: ");
                                                 String bookAuthorFullName = scanner.nextLine();
 
-                                                Book book1 = new Book(bookName, bookDescription, bookPrice, bookDate, bookAuthorFullName);
+                                                Book book1 = new Book(2l, bookName, bookDescription, bookPrice, bookDate, bookAuthorFullName);
                                                 user.addBook(book1);
                                                 break;
                                             case 2:
@@ -123,7 +125,7 @@ public class Main {
                                                 System.out.println("Write memory the device: ");
                                                 int deviceMemory = scInt.nextInt();
 
-                                                Device device1 = new Device(deviceName, deviceDescription, devicePrice, deviceDate, deviceBrand, deviceColor, deviceIsNew, deviceMemory);
+                                                Device device1 = new Device(2l, deviceName, deviceDescription, devicePrice, deviceDate, deviceBrand, deviceColor, deviceIsNew, deviceMemory);
                                                 user.addDevice(device1);
                                                 break;
                                             case 3:
@@ -144,6 +146,21 @@ public class Main {
                                     System.out.println(user.getAllDevice());
                                     break;
                                 case 5:
+                                    System.out.println("Write product id which do you want to delete: ");
+                                    long id = scanner.nextLong();
+                                    System.out.println(User.deleteProduct(id));
+                                    break;
+                                case 6:
+                                    System.out.println("Write how many products id do you want to delete: ");
+                                    int n = scInt.nextInt();
+                                    long[] ids = new long[n];
+                                    for (int i = 0; i < ids.length; i++) {
+                                        System.out.println("Write product ID: ");
+                                         ids[i] = scanner.nextLong();
+                                    }
+                                    System.out.println(User.deleteProduct(ids));
+                                    break;
+                                case 7:
                                     loggedIn = false;
                                 }
                             }
